@@ -3,7 +3,7 @@ import argparse
 import requests
 import zipfile
 import shutil
-from tqdm import tqdm  # Hiển thị tiến độ
+from tqdm import tqdm  # Thanh tiến độ
 
 def download_and_prepare_dataset(destination_path):
     url = "https://prod-dcd-datasets-cache-zipfiles.s3.eu-west-1.amazonaws.com/4gzzc9k49n-4.zip"
@@ -12,13 +12,12 @@ def download_and_prepare_dataset(destination_path):
 
     print(f"🔽 Đang tải dataset từ {url} ...")
 
-    # Gửi request đầu tiên để lấy dung lượng (Content-Length)
+    # Tải về với thanh tiến độ
     with requests.get(url, stream=True) as r:
         r.raise_for_status()
         total_size = int(r.headers.get('Content-Length', 0))
-        block_size = 8192  # 8KB mỗi lần đọc
+        block_size = 8192
 
-        # Sử dụng tqdm để hiển thị tiến độ
         with open(zip_path, 'wb') as f, tqdm(
             total=total_size, unit='B', unit_scale=True, desc="📥 Tải về", ncols=80
         ) as progress_bar:
@@ -33,10 +32,18 @@ def download_and_prepare_dataset(destination_path):
         print("🧹 Đã xóa thư mục dataset cũ.")
 
     print("📦 Đang giải nén...")
+
+    # Giải nén với tiến độ
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        zip_ref.extractall(dataset_dir)
+        zip_list = zip_ref.infolist()  # Danh sách các file trong zip
+        with tqdm(total=len(zip_list), desc="🗂️  Đang giải nén", unit="file", ncols=80) as progress_bar:
+            for file in zip_list:
+                zip_ref.extract(file, dataset_dir)
+                progress_bar.update(1)
+
     print("✅ Giải nén xong.")
 
+    # Di chuyển thư mục con
     src = os.path.join(dataset_dir, "FOSD Female Speech Dataset", "Female 16k")
 
     if os.path.exists(destination_path):
