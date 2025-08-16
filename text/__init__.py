@@ -58,15 +58,15 @@ def sequence_to_text(sequence):
 
 def _clean_text(text, cleaner_names):
     for name in cleaner_names:
-        # Kiểm tra và sử dụng bộ làm sạch từ japanese.py nếu tên bộ làm sạch khớp
-        if name == 'japanese_to_ipa2':
-            text = japanese.japanese_to_ipa2(text)  # Sử dụng hàm japanese_to_ipa2 trong japanese.py
-        elif name == 'japanese_to_ipa':
-            text = japanese.japanese_to_ipa(text)  # Sử dụng hàm japanese_to_ipa trong japanese.py
-        elif name == 'japanese_to_ipa3':
-            text = japanese.japanese_to_ipa3(text)  # Sử dụng hàm japanese_to_ipa3 trong japanese.py
+        if name == 'vietnamese_to_ipa':
+            text = vietnamese.vietnamese_to_ipa(text)  
+        elif name == 'vietnamese_to_ipa_version1':
+            text = vietnamese.vietnamese_to_ipa_version1(text) 
+        elif name == 'vietnamese_to_ipa_version2':
+            text = vietnamese.vietnamese_to_ipa_version2(text)  
+        elif name == 'vietnamese_to_ipa_version3':
+            text = vietnamese.vietnamese_to_ipa_version3(text)
         else:
-            # Đối với các bộ làm sạch khác, sử dụng cleaners từ thư mục cleaners
             cleaner = getattr(cleaners, name)
             if not cleaner:
                 raise Exception(f"Unknown cleaner: {name}")
