@@ -35,7 +35,7 @@ def download_and_prepare_dataset(destination_path):
 
     # Giải nén với tiến độ
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        zip_list = zip_ref.infolist()  # Danh sách các file trong zip
+        zip_list = zip_ref.infolist()
         with tqdm(total=len(zip_list), desc="🗂️  Đang giải nén", unit="file", ncols=80) as progress_bar:
             for file in zip_list:
                 zip_ref.extract(file, dataset_dir)
@@ -50,6 +50,11 @@ def download_and_prepare_dataset(destination_path):
         shutil.rmtree(destination_path)
     shutil.move(src, destination_path)
     print(f"✅ Đã chuyển thư mục tới: {destination_path}")
+
+    # ✅ Xóa thư mục dataset gốc sau khi hoàn tất
+    if os.path.exists(dataset_dir):
+        shutil.rmtree(dataset_dir)
+        print(f"🧽 Đã xóa thư mục tạm: {dataset_dir}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Download and prepare FOSD Female Speech Dataset.")
