@@ -8,7 +8,7 @@ from tqdm import tqdm  # Thanh tiến độ
 def download_and_prepare_dataset(destination_path):
     url = "https://prod-dcd-datasets-cache-zipfiles.s3.eu-west-1.amazonaws.com/4gzzc9k49n-4.zip"
     zip_path = "dataset.zip"
-    dataset_dir = "dataset"
+    dataset_dir = "dataset_FOSD"
 
     print(f"🔽 Đang tải dataset từ {url} ...")
 
