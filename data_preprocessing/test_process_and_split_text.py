@@ -223,7 +223,6 @@ def process_and_split_text_FPTOpen(inpath, outdir, seed=42):
                 continue  # Bỏ qua dòng thiếu thông tin file hoặc text
             # Đổi đường dẫn đầu vào
             line = line.replace("FPTOpenSpeechData", "DUMMY1/FPTOpenSpeechData")
-            line = line.replace("|", ".wav|")
             valid_lines.append(line)
 
     total = len(valid_lines)
