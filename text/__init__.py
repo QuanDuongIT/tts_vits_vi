@@ -66,6 +66,8 @@ def _clean_text(text, cleaner_names):
             text = vietnamese.vietnamese_to_ipa_version2(text)  
         elif name == 'vietnamese_to_ipa_version3':
             text = vietnamese.vietnamese_to_ipa_version3(text)
+        elif name == 'vietnamese_to_ipa_version4':
+            text = vietnamese.vietnamese_to_ipa_version4(text)
         else:
             cleaner = getattr(cleaners, name)
             if not cleaner:
