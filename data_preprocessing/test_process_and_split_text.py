@@ -204,8 +204,13 @@ def process_and_split_text_css10_japanese(inpath, outdir, seed=42):
     print(f" - Val:   {len(val_lines)} dòng")
     print(f" - Test:  {len(test_lines)} dòng")
 
+
+
+
 def process_and_split_text_FPTOpen(inpath, outdir, seed=42):
     os.makedirs(outdir, exist_ok=True)
+
+    audioname = 'vi_fptopen_audio_text'
 
     valid_lines = []
     with open(inpath, "r", encoding="utf-8-sig") as f:
