@@ -16,8 +16,14 @@
 # SPACE_ID = symbols.index(" ")
 from viphoneme import syms
 
+
+# Lọc những symbol KHÔNG nằm trong tập bị loại
+filtered_syms = [s for s in syms]
+
+_letters_ipa = ''.join(filtered_syms)
+
 # Export all symbols:
-symbols = ''.join(syms)
+symbols = list(_letters_ipa)
 
 # Special symbol ids
 SPACE_ID = symbols.index(" ")
