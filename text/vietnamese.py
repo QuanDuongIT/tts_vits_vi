@@ -1,5 +1,6 @@
 import re
 from viphoneme import vi2IPA
+from piper_phonemize import  *
 
 # Regex để tách ký tự không thuộc bảng chữ cái tiếng Việt
 _vietnamese_marks = re.compile(
@@ -47,6 +48,16 @@ def vietnamese_to_ipa_version3(text):
     ipa = vietnamese_to_ipa_version2(text)
     ipa = ipa.replace('ɗ', 'ɖ')  # Thay thế phụ âm nếu muốn
     return ipa
+
+
+# Thay thế các ký hiệu đặc biệt thành từ tương ứng
+def symbols_to_vietnamese(text):
+    return text.replace('%', 'phần trăm')
+
+# Hàm chuyển văn bản sang IPA dùng viphoneme
+def vietnamese_to_ipa_version4(text):
+    text=symbols_to_vietnamese(text)
+    return ''.join(p for word in phonemize_espeak(text, "vi") for p in word)
 
 
 
