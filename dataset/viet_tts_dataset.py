@@ -52,12 +52,12 @@ def convert_tsv_to_txt(input_file, output_dir):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Download VietTTS dataset and convert TSV to TXT.")
     parser.add_argument('--output', type=str, default='dataset/',
-                        help='Directory to save the output meta_data.txt (default: dataset/)')
+                        help='Directory to save the extracted data and output meta_data.txt (default: dataset/)')
     args = parser.parse_args()
 
     dataset_url = "https://huggingface.co/datasets/ntt123/viet-tts-dataset/resolve/main/viet-tts.tar.gz"
     download_path = "viet-tts.tar.gz"
-    extract_path = "dataset"
+    extract_path = args.output  # <-- thay đổi ở đây
     input_file = os.path.join(extract_path, "meta_data.tsv")
 
     download_with_progress(dataset_url, download_path)
