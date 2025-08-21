@@ -59,15 +59,11 @@ def sequence_to_text(sequence):
 def _clean_text(text, cleaner_names):
     for name in cleaner_names:
         if name == 'vietnamese_to_ipa':
-            text = vietnamese.vietnamese_to_ipa(text)  
+            text = vietnamese.vietnamese_to_ipa_version(text)  
         elif name == 'vietnamese_to_ipa_version1':
             text = vietnamese.vietnamese_to_ipa_version1(text) 
         elif name == 'vietnamese_to_ipa_version2':
             text = vietnamese.vietnamese_to_ipa_version2(text)  
-        elif name == 'vietnamese_to_ipa_version3':
-            text = vietnamese.vietnamese_to_ipa_version3(text)
-        elif name == 'vietnamese_to_ipa_version4':
-            text = vietnamese.vietnamese_to_ipa_version4(text)
         else:
             cleaner = getattr(cleaners, name)
             if not cleaner:
