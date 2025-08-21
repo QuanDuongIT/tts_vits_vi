@@ -17,7 +17,7 @@ def symbols_to_vietnamese(text):
     return text.replace('%', 'phần trăm')
 
 # Hàm chuyển văn bản sang IPA dùng viphoneme
-def vietnamese_to_ipa_version4(text):
+def vietnamese_to_ipa_version(text):
     text=symbols_to_vietnamese(text)
     return ''.join(p for word in phonemize_espeak(text, "vi") for p in word)
 
