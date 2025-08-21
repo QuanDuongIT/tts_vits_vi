@@ -11,6 +11,10 @@ import torch
 from export_onnx import export_onnx_model
 from pathlib import Path
 import re
+import librosa
+import torch
+import numpy as np
+
 
 MATPLOTLIB_FLAG = False
 
@@ -183,10 +187,16 @@ def plot_alignment_to_numpy(alignment, info=None):
     return data
 
 
-def load_wav_to_torch(full_path):
-    sampling_rate, data = read(full_path)
-    return torch.FloatTensor(data.astype(np.float32)), sampling_rate
+# def load_wav_to_torch(full_path):
+#     sampling_rate, data = read(full_path)
+#     return torch.FloatTensor(data.astype(np.float32)), sampling_rate
 
+def load_wav_to_torch(full_path):
+    # Load audio với sampling rate gốc (sr=None)
+    wav, sampling_rate = librosa.load(full_path, sr=None)
+    # wav trả về dạng numpy float32 rồi, nhưng để chắc convert lại
+    wav_tensor = torch.FloatTensor(wav.astype(np.float32))
+    return wav_tensor, sampling_rate
 
 def load_filepaths_and_text(filename, split="|"):
     with open(filename, encoding="utf-8") as f:
