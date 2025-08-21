@@ -1,23 +1,14 @@
-# """ from https://github.com/keithito/tacotron """
-
-# """
-# Defines the set of symbols used in text input to the model.
-# """
-# _pad = "_"
-# _punctuation = ';:,.!?¡¿—…"«»“” '
-# _letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-# _letters_ipa = "ɑɐɒæɓʙβɔɕçɗɖðʤəɘɚɛɜɝɞɟʄɡɠɢʛɦɧħɥʜɨɪʝɭɬɫɮʟɱɯɰŋɳɲɴøɵɸθœɶʘɹɺɾɻʀʁɽʂʃʈʧʉʊʋⱱʌɣɤʍχʎʏʑʐʒʔʡʕʢǀǁǂǃˈˌːˑʼʴʰʱʲʷˠˤ˞↓↑→↗↘'̩'ᵻ"
+import piper_phonemize
+from piper_phonemize import *
 
 
-# # Export all symbols:
-# symbols = [_pad] + list(_punctuation) + list(_letters) + list(_letters_ipa)
+def All_method():
+    print(dir(piper_phonemize))
 
-# # Special symbol ids
-# SPACE_ID = symbols.index(" ")
+def symbols():
+    print(''.join(get_espeak_map()))
 
-from viphoneme import syms
-
-symbols = ''.join(syms)
+symbols = ''.join(get_espeak_map())
 
 # Special symbol ids
 SPACE_ID = symbols.index(" ")
